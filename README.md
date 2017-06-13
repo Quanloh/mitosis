@@ -9,11 +9,26 @@ Tested on Ubuntu 16.04.2, but should be able to find alternatives on all distros
 sudo apt install openocd gcc-arm-none-eabi
 ```
 
+**On OS X 10.12.5:**
+
+* openocd - https://github.com/gnu-mcu-eclipse/openocd/releases/tag/gae-0.10.0-20170418
+* gcc - https://gist.github.com/joegoggins/7763637
+
+or
+
+```
+brew install openocd
+brew tap PX4/homebrew-px4
+brew update
+brew install gcc-arm-none-eabi
+```
+
 ## Download Nordic SDK
 
 Nordic does not allow redistribution of their SDK or components, so download and extract from their site:
 
-https://www.nordicsemi.com/eng/nordic/Products/nRF5-SDK/nRF5-SDK-v12-zip/54291
+https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v11.x.x/
+https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v11.x.x/nRF5_SDK_11.0.0_89a8197.zip
 
 Firmware written and tested with version 11
 
@@ -32,6 +47,13 @@ Replaced with:
 ```
 GNU_INSTALL_ROOT := /usr/
 ```
+
+**On OS X 10.12.5:**
+
+```
+GNU_INSTALL_ROOT := /usr/local/Cellar/gcc-arm-none-eabi/20160928
+```
+
 
 ## Clone repository
 Inside nRF5_SDK_11/
@@ -78,6 +100,8 @@ echo reset halt | telnet localhost 4444
 echo flash write_image `readlink -f precompiled-basic-left.hex` | telnet localhost 4444
 echo reset | telnet localhost 4444
 ```
+
+**Note: Use greadlink on OS X**
 
 ## Automatic make and programming scripts
 To use the automatic build scripts:
